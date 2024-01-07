@@ -31,7 +31,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    String[] numbers = new String[]{"1", "2", "3", "4", "6", "7", "8", "9"};
+    String[] numbers = new String[]{"1", "2", "3", "4"};
     Integer[] colors = new Integer[]{R.color.orange, R.color.blue, R.color.pink, R.color.yellow, R.color.sky, R.color.green};
     private MaterialCardView selectedCard;
     private String selectedNumber;
@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         binding.card2.setVisibility(View.VISIBLE);
         binding.card3.setVisibility(View.VISIBLE);
         binding.card4.setVisibility(View.VISIBLE);
+        binding.card5.setVisibility(View.VISIBLE);
+        binding.card6.setVisibility(View.VISIBLE);
+        binding.card7.setVisibility(View.VISIBLE);
+        binding.card8.setVisibility(View.VISIBLE);
 
         ArrayList<String> shuffledNumbers = new ArrayList<>(List.of(numbers));
         ArrayList<Integer> shuffledColors = new ArrayList<>(List.of(colors));
@@ -72,17 +76,25 @@ public class MainActivity extends AppCompatActivity {
 
         String number1 = shuffledNumbers.get(0);
         String number2 = shuffledNumbers.get(1);
+        String number3 = shuffledNumbers.get(2);
+        String number4 = shuffledNumbers.get(3);
 
         int color1 = shuffledColors.get(0);
         int color2 = shuffledColors.get(1);
+        int color3 = shuffledColors.get(2);
+        int color4 = shuffledColors.get(3);
 
-        List<TextView> textViews = new ArrayList<>(List.of(binding.text1, binding.text3, binding.text2, binding.text4));
+        List<TextView> textViews = new ArrayList<>(List.of(binding.text1, binding.text3, binding.text2, binding.text4, binding.text5, binding.text6, binding.text7, binding.text8));
         Collections.shuffle(textViews);
 
         textViews.get(0).setText(number1);
         textViews.get(1).setText(number2);
         textViews.get(2).setText(number2);
         textViews.get(3).setText(number1);
+        textViews.get(4).setText(number3);
+        textViews.get(5).setText(number4);
+        textViews.get(6).setText(number4);
+        textViews.get(7).setText(number3);
 
         for (int i = 0; i < textViews.size(); i++) {
             TextView textView = textViews.get(i);
@@ -91,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                 cardView.setCardBackgroundColor(getResources().getColor(color1, null));
             } else if (textView.getText().toString().equals(number2)) {
                 cardView.setCardBackgroundColor(getResources().getColor(color2, null));
+            } else if (textView.getText().toString().equals(number3)) {
+                cardView.setCardBackgroundColor(getResources().getColor(color3, null));
+            } else if (textView.getText().toString().equals(number4)) {
+                cardView.setCardBackgroundColor(getResources().getColor(color4, null));
             }
             cardView.setOnClickListener(v -> onCardClicked(cardView, textView));
         }
@@ -135,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             selectedCard = null;
             selectedNumber = null;
 
-            List<MaterialCardView> allCards = new ArrayList<>(List.of(binding.card1, binding.card2, binding.card3, binding.card4));
+            List<MaterialCardView> allCards = new ArrayList<>(List.of(binding.card1, binding.card2, binding.card3, binding.card4, binding.card5, binding.card6, binding.card7, binding.card8));
             boolean check = false;
 
             for (MaterialCardView currentCard : allCards) {
@@ -220,6 +236,14 @@ public class MainActivity extends AppCompatActivity {
             return binding.card3;
         } else if (id == R.id.text4) {
             return binding.card4;
+        } else if (id == R.id.text5) {
+            return binding.card5;
+        } else if (id == R.id.text6) {
+            return binding.card6;
+        } else if (id == R.id.text7) {
+            return binding.card7;
+        } else if (id == R.id.text8) {
+            return binding.card8;
         }
         return null;
     }

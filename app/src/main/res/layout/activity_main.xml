@@ -70,6 +70,49 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/black"
+            app:cardBackgroundColor="@color/green"
+            app:strokeWidth="2dp">
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                tools:text="2"
+                android:textColor="@color/white"
+                android:textSize="70sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="5dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/black"
+            app:cardBackgroundColor="@color/pink"
+            app:strokeWidth="2dp">
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                tools:text="1"
+                android:textColor="@color/white"
+                android:textSize="70sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +123,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card3"
+                android:id="@+id/card5"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="5dp"
@@ -90,7 +133,7 @@
                 app:strokeWidth="2dp">
 
                 <TextView
-                    android:id="@+id/text3"
+                    android:id="@+id/text5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -101,7 +144,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card4"
+                android:id="@+id/card6"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="5dp"
@@ -111,11 +154,54 @@
                 app:strokeWidth="2dp">
 
                 <TextView
-                    android:id="@+id/text4"
+                    android:id="@+id/text6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     tools:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="70sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card7"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/black"
+                app:cardBackgroundColor="@color/green"
+                app:strokeWidth="2dp">
+
+                <TextView
+                    android:id="@+id/text7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    tools:text="2"
+                    android:textColor="@color/white"
+                    android:textSize="70sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card8"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="5dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/black"
+                app:cardBackgroundColor="@color/pink"
+                app:strokeWidth="2dp">
+
+                <TextView
+                    android:id="@+id/text8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    tools:text="8"
                     android:textColor="@color/white"
                     android:textSize="70sp" />
 
