@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MatchingGame" parent="Theme.Material3.Light.NoActionBar">
+        <!--  Font Family -->
+        <item name="android:fontFamily">@font/lemon</item>
+        <item name="android:windowDisablePreview">true</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!-- Status bar color. -->
+    </style>
+
+    <style name="Theme.MatchingGame" parent="Base.Theme.MatchingGame" />
+</resources>
