@@ -32,6 +32,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     String[] numbers = new String[]{"1", "2", "3", "4"};
+    ArrayList<String> order = new ArrayList<>();
     Integer[] colors = new Integer[]{R.color.orange, R.color.blue, R.color.pink, R.color.yellow, R.color.sky, R.color.green};
     private MaterialCardView selectedCard;
     private String selectedNumber;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-
+        order = new ArrayList<>(List.of("1","2","3","4"));
         binding.card1.setVisibility(View.VISIBLE);
         binding.card2.setVisibility(View.VISIBLE);
         binding.card3.setVisibility(View.VISIBLE);
@@ -115,9 +116,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void onCardClicked(MaterialCardView cardView, TextView textView) {
         if (selectedCard == null) {
-            selectedCard = cardView;
-            selectedNumber = textView.getText().toString();
-            cardView.setVisibility(View.INVISIBLE);
+            if (order.get(0).equals(textView.getText().toString())) {
+                try {
+                    AssetFileDescriptor afd = getAssets().openFd("pop.mp3");
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                playSound();
+                selectedCard = cardView;
+                selectedNumber = textView.getText().toString();
+                cardView.setVisibility(View.INVISIBLE);
+            } else {
+                String[] file = new String[]{"fail1.mp3", "fail2.mp3"};
+                try {
+                    String randomFileName = file[new Random().nextInt(file.length)];
+                    AssetFileDescriptor afd = getAssets().openFd(randomFileName);
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                playSound();
+            }
         } else {
             if (textView.getText().toString().equals(selectedNumber)) {
                 String[] file = new String[]{"success1.mp3", "success2.mp3"};
@@ -131,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 playSound();
+                order.remove(0);
                 cardView.setVisibility(View.INVISIBLE);
                 selectedCard.setVisibility(View.INVISIBLE);
             } else {
@@ -187,9 +212,7 @@ public class MainActivity extends AppCompatActivity {
             StringBuffer stringBuffer = new StringBuffer();
             while (true) {
                 try {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        if ((input = in != null ? in.readLine() : null) == null) break;
-                    }
+                    if ((input = in != null ? in.readLine() : null) == null) break;
                 } catch (final IOException e) {
                     e.printStackTrace();
                 }

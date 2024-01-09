@@ -11,15 +11,25 @@
         android:id="@+id/close"
         android:layout_width="30sp"
         android:layout_height="30sp"
-        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"
         android:src="@drawable/cancel" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Find the Matching Pair"
+        android:textColor="@color/black"
+        android:textSize="22sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/close"
         android:gravity="center"
-        android:layout_above="@id/text"
         android:orientation="vertical">
 
         <LinearLayout
@@ -210,20 +220,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:text="Find the Matching Pair"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>
