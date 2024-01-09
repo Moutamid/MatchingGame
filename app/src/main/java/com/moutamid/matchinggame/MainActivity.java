@@ -7,6 +7,7 @@ import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -27,23 +28,28 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
     ActivityMainBinding binding;
     String[] numbers = new String[]{"1", "2", "3", "4"};
+    String[] fail = new String[]{"OH NO", "OOPS", "Sorry"};
+    String[] success = new String[]{"Great Job", "Intelligent", "Excellent", "You Did it"};
     ArrayList<String> order = new ArrayList<>();
     Integer[] colors = new Integer[]{R.color.orange, R.color.blue, R.color.pink, R.color.yellow, R.color.sky, R.color.green};
     private MaterialCardView selectedCard;
     private String selectedNumber;
     private MediaPlayer mediaPlayer;
-
+    TextToSpeech tts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         checkApp(this);
+
+        tts = new TextToSpeech(this, this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             getWindow().setDecorFitsSystemWindows(false);
@@ -122,21 +128,28 @@ public class MainActivity extends AppCompatActivity {
                 selectedNumber = textView.getText().toString();
                 cardView.setVisibility(View.INVISIBLE);
             } else {
-                sound(new String[]{"fail1.mp3", "fail2.mp3"});
+                String msg = fail[new Random().nextInt(fail.length)];
+                tts.speak(msg, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         } else {
             if (textView.getText().toString().equals(selectedNumber)) {
-                sound(new String[]{"success1.mp3", "success2.mp3"});
+               // sound(new String[]{"success1.mp3"});
+                String msg = success[new Random().nextInt(success.length)];
+                tts.speak(msg, TextToSpeech.QUEUE_FLUSH, null, null);
                 order.remove(0);
                 cardView.setVisibility(View.INVISIBLE);
                 selectedCard.setVisibility(View.INVISIBLE);
+
+                selectedCard = null;
+                selectedNumber = null;
+
             } else {
-                sound(new String[]{"fail1.mp3", "fail2.mp3"});
+              //  sound(new String[]{"fail1.mp3", "fail2.mp3"});
+                String msg = fail[new Random().nextInt(fail.length)];
+                tts.speak(msg, TextToSpeech.QUEUE_FLUSH, null, null);
                 cardView.setVisibility(View.VISIBLE);
-                selectedCard.setVisibility(View.VISIBLE);
+              //  selectedCard.setVisibility(View.VISIBLE);
             }
-            selectedCard = null;
-            selectedNumber = null;
 
             List<MaterialCardView> allCards = new ArrayList<>(List.of(binding.card1, binding.card2, binding.card3, binding.card4, binding.card5, binding.card6, binding.card7, binding.card8));
             boolean check = false;
@@ -259,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+        tts.stop();
+        tts.shutdown();
     }
 
 
@@ -271,4 +286,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = tts.setLanguage(Locale.US);
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                tts.setLanguage(Locale.UK);
+            }
+        }
+    }
 }
