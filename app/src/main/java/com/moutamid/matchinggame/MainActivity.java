@@ -117,59 +117,21 @@ public class MainActivity extends AppCompatActivity {
     private void onCardClicked(MaterialCardView cardView, TextView textView) {
         if (selectedCard == null) {
             if (order.get(0).equals(textView.getText().toString())) {
-                try {
-                    AssetFileDescriptor afd = getAssets().openFd("pop.mp3");
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                playSound();
+                sound(new String[]{"pop.mp3"});
                 selectedCard = cardView;
                 selectedNumber = textView.getText().toString();
                 cardView.setVisibility(View.INVISIBLE);
             } else {
-                String[] file = new String[]{"fail1.mp3", "fail2.mp3"};
-                try {
-                    String randomFileName = file[new Random().nextInt(file.length)];
-                    AssetFileDescriptor afd = getAssets().openFd(randomFileName);
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                playSound();
+                sound(new String[]{"fail1.mp3", "fail2.mp3"});
             }
         } else {
             if (textView.getText().toString().equals(selectedNumber)) {
-                String[] file = new String[]{"success1.mp3", "success2.mp3"};
-                try {
-                    String randomFileName = file[new Random().nextInt(file.length)];
-                    AssetFileDescriptor afd = getAssets().openFd(randomFileName);
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                playSound();
+                sound(new String[]{"success1.mp3", "success2.mp3"});
                 order.remove(0);
                 cardView.setVisibility(View.INVISIBLE);
                 selectedCard.setVisibility(View.INVISIBLE);
             } else {
-                String[] file = new String[]{"fail1.mp3", "fail2.mp3"};
-                try {
-                    String randomFileName = file[new Random().nextInt(file.length)];
-                    AssetFileDescriptor afd = getAssets().openFd(randomFileName);
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                playSound();
+                sound(new String[]{"fail1.mp3", "fail2.mp3"});
                 cardView.setVisibility(View.VISIBLE);
                 selectedCard.setVisibility(View.VISIBLE);
             }
@@ -190,6 +152,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void sound(String[] file) {
+        try {
+            String randomFileName = file[new Random().nextInt(file.length)];
+            AssetFileDescriptor afd = getAssets().openFd(randomFileName);
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        playSound();
     }
 
     public static void checkApp(Activity activity) {
