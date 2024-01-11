@@ -122,7 +122,11 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     private void onCardClicked(MaterialCardView cardView, TextView textView) {
         if (selectedCard == null) {
-            if (order.get(0).equals(textView.getText().toString())) {
+            sound(new String[]{"pop.mp3"});
+            selectedCard = cardView;
+            selectedNumber = textView.getText().toString();
+            cardView.setVisibility(View.INVISIBLE);
+            /*if (order.get(0).equals(textView.getText().toString())) {
                 sound(new String[]{"pop.mp3"});
                 selectedCard = cardView;
                 selectedNumber = textView.getText().toString();
@@ -130,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             } else {
                 String msg = fail[new Random().nextInt(fail.length)];
                 tts.speak(msg, TextToSpeech.QUEUE_FLUSH, null, null);
-            }
+            }*/
         } else {
             if (textView.getText().toString().equals(selectedNumber)) {
                // sound(new String[]{"success1.mp3"});
